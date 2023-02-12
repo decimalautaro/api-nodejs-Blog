@@ -3,16 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.js"
   },
   "author": "Lautaro Decima",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^4.17.17",
-    "nodemon": "^2.0.20",
-    "typescript": "^4.9.5"
+    "nodemon": "^2.0.20"
   },
   "dependencies": {
     "cors": "^2.8.5",
