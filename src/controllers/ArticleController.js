@@ -45,10 +45,6 @@ const getAll = (req, res) =>{
                 message: "no se han encontrado articulos"
             })
         }
-        // filtro de 3 articulos opcional.
-        if(req.params.ultimos){
-            consulta.limit(3)
-        }
 
         return res.status(200).send({
             status:"success",
@@ -58,7 +54,26 @@ const getAll = (req, res) =>{
     })
 }
 
+const getById = (req, res)=>{
+    const {id} = req.params
+    Article.findById(id, (error,article)=>{
+
+        if(error || !article){
+            return res.status(404).json({
+                status:"error",
+                message: "no se ha encontrado el articulo"
+            })
+        }
+        res.status(200).json({
+            status: "success",
+            article
+        })
+
+    })
+}
+
 module.exports = {
     getAll,
+    getById,
     create
 }
