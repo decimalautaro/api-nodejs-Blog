@@ -71,9 +71,54 @@ const getById = (req, res)=>{
 
     })
 }
+const remove = (req, res)=>{
+    const { id } = req.params;
+    Article.findOneAndDelete({_id : id}, (error,articleRemove)=>{
+        if(error || !articleRemove){
+            
+        return res.status(500).json({
+            status:"error",
+            article: articleRemove,
+            message: "error al borrar el articulo"
+        })
+        }
+
+
+        return res.status(200).json({
+            status:"success",
+            article: articleRemove,
+            message: "articulo borrado"
+        })
+    }) 
+}
+
+const update = (req, res) =>{
+    const { id } = req.params;
+    const { body } = req.body;
+    Article.findOneAndUpdate({_id: id},(error, articleUpdate)=>{
+        if(error || !articleUpdate){
+            
+            return res.status(404).json({
+                status:"error",
+                article: articleUpdate,
+                message: "error al upgradear el articulo"
+            })
+            }
+    
+    
+            return res.status(200).json({
+                status:"success",
+                article: articleUpdate,
+                message: "articulo borrado"
+            })
+    })
+
+}
 
 module.exports = {
     getAll,
     getById,
-    create
+    create,
+    update,
+    remove
 }
