@@ -4,7 +4,7 @@ const  ArticleController = require("../controllers/ArticleController.js")
 const routerArticle = Router();
 
 
-routerArticle.get("/", ArticleController.getAll )
+routerArticle.get("/:ultimos?", ArticleController.getAll )
 routerArticle.post("/crear",ArticleController.create )
 
 

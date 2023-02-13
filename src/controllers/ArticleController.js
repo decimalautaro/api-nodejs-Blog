@@ -38,12 +38,16 @@ const create = (req, res) =>{
 }
 
 const getAll = (req, res) =>{
-    const consulta = Article.find({}).exec((error, articles)=>{
+    const consulta = Article.find({}).sort({date:-1}).exec((error, articles)=>{
         if(error || !articles){
             return res.status(404).json({
                 status:"error",
                 message: "no se han encontrado articulos"
             })
+        }
+        // filtro de 3 articulos opcional.
+        if(req.params.ultimos){
+            consulta.limit(3)
         }
 
         return res.status(200).send({
