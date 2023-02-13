@@ -37,6 +37,24 @@ const create = (req, res) =>{
     })
 }
 
+const getAll = (req, res) =>{
+    const consulta = Article.find({}).exec((error, articles)=>{
+        if(error || !articles){
+            return res.status(404).json({
+                status:"error",
+                message: "no se han encontrado articulos"
+            })
+        }
+
+        return res.status(200).send({
+            status:"success",
+            articles
+
+        })
+    })
+}
+
 module.exports = {
+    getAll,
     create
 }
