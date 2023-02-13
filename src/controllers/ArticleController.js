@@ -92,26 +92,41 @@ const remove = (req, res)=>{
     }) 
 }
 
-const update = (req, res) =>{
+const edit = (req, res) =>{
     const { id } = req.params;
-    const { body } = req.body;
-    Article.findOneAndUpdate({_id: id},(error, articleUpdate)=>{
+    const params= req.body;
+
+    try {
+        let validarTitle = !validator.isEmpty(params.title);
+        let validarContent = !validator.isEmpty(params.content);
+
+        if(!validarContent || !validarTitle){
+            throw new Error ("no se ha validado la informacion")
+        }
+    } catch (error) {
+        return res.status(400).json({
+            status:"error",
+            message: "faltan datos por enviar"
+        })
+
+    }
+
+    Article.findOneAndUpdate({_id : id}, params, {new: true}, (error, articleUpdate)=>{
+        
         if(error || !articleUpdate){
-            
-            return res.status(404).json({
-                status:"error",
-                article: articleUpdate,
-                message: "error al upgradear el articulo"
+            return res.status(500).json({
+                status: "error",
+                message: "error al actualizar"
             })
-            }
-    
-    
-            return res.status(200).json({
-                status:"success",
-                article: articleUpdate,
-                message: "articulo borrado"
-            })
+        }
+        
+        return res.status(200).json({
+            status: "success",
+            article: articleUpdate
+        })
+
     })
+
 
 }
 
@@ -119,6 +134,6 @@ module.exports = {
     getAll,
     getById,
     create,
-    update,
+    edit,
     remove
 }
