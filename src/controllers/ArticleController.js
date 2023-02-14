@@ -1,5 +1,6 @@
 const Article = require("../models/Articles");
 const { validateArticle } = require("../helpers/validate");
+const fs = require("fs");
 
 const create = (req, res) =>{
     const params = req.body;
@@ -122,10 +123,46 @@ const edit = (req, res) =>{
 
 }
 
+const uploadImage = (req, res) =>{
+    if(!req.file && !req.files){
+        return res.status(404).json({
+            status: "error",
+            message: "Petición invalida."
+        })
+    }
+
+    let archive = req.file.originalname;
+
+    let archiveSplit = archive.split("\.")
+    let archiveExtension = archiveSplit[1];
+
+    if (archiveExtension != "png" && archiveExtension != "jpg" &&
+        archiveExtension != "jpeg" && archiveExtension != "gif") {
+        
+            fs.unlink(req.file.path, (error)=>{
+                return res.status(400).json({
+                    status: "error",
+                    message: "extension del archivo invalida."
+                })
+            })
+    }
+    else{
+
+        return res.status(200).json({
+            status: "success",
+            archiveExtension,
+            files: req.file
+        })
+        
+    }
+
+}
+
 module.exports = {
     getAll,
     getById,
     create,
     edit,
-    remove
+    remove,
+    uploadImage
 }
