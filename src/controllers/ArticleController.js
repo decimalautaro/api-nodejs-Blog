@@ -191,6 +191,31 @@ const image = (req, res)=>{
 
 }
 
+const search = (req, res)=>{
+    
+    const {search} = req.params;
+    
+    Article.find({ "$or": [
+        {title: {"$regex": search, "$options": "i"}},
+        {content: {"$regex": search, "$options": "i"}}
+
+    ]
+    }).sort({date: -1})
+      .exec((error, foundItems)=>{
+        if(error || !foundItems || foundItems.length <= 0){
+            return res.status(404).json({
+                status: "error",
+                message : "no se han encontrado articulos"
+            })
+        }
+
+        return res.status(200).json({
+            status: "success",
+            articles: foundItems
+        })
+      })
+}
+
 module.exports = {
     getAll,
     getById,
@@ -198,5 +223,6 @@ module.exports = {
     edit,
     remove,
     uploadImage,
-    image
+    image,
+    search
 }

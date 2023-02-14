@@ -22,10 +22,7 @@ routerArticle.delete("/delete/:id",ArticleController.remove );
 routerArticle.put("/edit/:id",ArticleController.edit );
 routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController.uploadImage );
 routerArticle.get("/image/:file", ArticleController.image );
-
-
-
-
+routerArticle.get("/search/:search", ArticleController.search );
 
 
 module.exports = {routerArticle}
