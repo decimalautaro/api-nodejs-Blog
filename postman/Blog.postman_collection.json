@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "c5807344-6f56-46c0-aa7b-18779e1b3229",
+		"name": "Blog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19270942"
+	},
+	"item": [
+		{
+			"name": "method search",
+			"item": [
+				{
+					"name": "search-Image",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/articles/image/article1676398385625nodejs.png",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"image",
+								"article1676398385625nodejs.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search-Article",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/articles/search/prueba",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"search",
+								"prueba"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles/63ebce8143d3b3489d91f331",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"63ebce8143d3b3489d91f331"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "Articulo 10",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "Prueba 10",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/articles/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "upload-Image",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/home/lautaro/Descargas/react.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/articles/upload-image/63ebce7b43d3b3489d91f32f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"upload-image",
+						"63ebce7b43d3b3489d91f32f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/articles/delete/63ea5dc65c5b7ecfdbe225da",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"delete",
+						"63ea5dc65c5b7ecfdbe225da"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "title",
+							"value": "PROBANDO 9",
+							"type": "text"
+						},
+						{
+							"key": "content",
+							"value": "TITULO 9!!",
+							"type": "text"
+						},
+						{
+							"key": "date",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/articles/edit/63ebce8143d3b3489d91f331",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"articles",
+						"edit",
+						"63ebce8143d3b3489d91f331"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
