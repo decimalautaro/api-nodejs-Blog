@@ -1,6 +1,7 @@
 const Article = require("../models/Articles");
 const { validateArticle } = require("../helpers/validate");
 const fs = require("fs");
+const path = require("path");
 
 const create = (req, res) =>{
     const params = req.body;
@@ -148,13 +149,45 @@ const uploadImage = (req, res) =>{
     }
     else{
 
+        const { id } = req.params;
+    
+    Article.findOneAndUpdate({_id : id}, {image: req.file.filename}, {new: true}, (error, articleUpdate)=>{
+        
+        if(error || !articleUpdate){
+            return res.status(500).json({
+                status: "error",
+                message: "error al actualizar"
+            })
+        }
+        
         return res.status(200).json({
             status: "success",
-            archiveExtension,
-            files: req.file
+            article: articleUpdate,
+            file: req.file
+            })
+
         })
-        
     }
+
+}
+
+const image = (req, res)=>{
+    let file = req.params.file;
+    let routePhysical = "./src/images/articles/"+file;
+    
+    fs.stat(routePhysical, (error,exist)=>{
+        if (exist) {
+            return res.sendFile(path.resolve(routePhysical))
+        }else{
+            return res.status(404).json({
+                status: "error",
+                message: "La imagen no existe",
+                exist,
+                file,
+                routePhysical
+            })
+        }
+    })
 
 }
 
@@ -164,5 +197,6 @@ module.exports = {
     create,
     edit,
     remove,
-    uploadImage
+    uploadImage,
+    image
 }
