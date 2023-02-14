@@ -1,18 +1,14 @@
-const validator = require("validator")
-const Article = require("../models/Articles")
+const Article = require("../models/Articles");
+const { validateArticle } = require("../helpers/validate");
 
 const create = (req, res) =>{
     const params = req.body;
 
-    try {
-        let validarTitle = !validator.isEmpty(params.title);
-        let validarContent = !validator.isEmpty(params.content);
+    try{
+        
+        validateArticle(params)
 
-        if(!validarContent || !validarTitle){
-            throw new Error ("no se ha validado la informacion")
-        }
-
-    } catch (error) {
+    }catch (error) {
         return res.status(400).json({
             status:"error",
             message: "faltan datos por enviar"
@@ -96,21 +92,17 @@ const edit = (req, res) =>{
     const { id } = req.params;
     const params= req.body;
 
-    try {
-        let validarTitle = !validator.isEmpty(params.title);
-        let validarContent = !validator.isEmpty(params.content);
-
-        if(!validarContent || !validarTitle){
-            throw new Error ("no se ha validado la informacion")
-        }
-    } catch (error) {
+    try{
+        
+        validateArticle(params)
+        
+    }catch (error) {
         return res.status(400).json({
             status:"error",
             message: "faltan datos por enviar"
         })
-
     }
-
+    
     Article.findOneAndUpdate({_id : id}, params, {new: true}, (error, articleUpdate)=>{
         
         if(error || !articleUpdate){
