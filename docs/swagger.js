@@ -27,14 +27,6 @@ const swaggerDefinition ={
                     },
                     content:{
                         type: "string"
-                    },
-                    date:{
-                        type: "string",
-                        format: "date"
-                    },
-                    image:{
-                        type: "string",
-                        
                     }
                 }
             }

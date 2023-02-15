@@ -35,7 +35,50 @@ const upload = multer({storage: storage});
  *              description: "No se encontraron articulos."
  */
 routerArticle.get("/", ArticleController.getAll );
+
+/** 
+ * @openapi 
+ * /{id}:
+ *      get:
+ *          tags:
+ *              - articles 
+ *          summary: "Detalle del articulo"
+ *          description: Obteniendo un articulo especifico
+ *          parameters:
+ *          - name: id
+ *            in: path
+ *            required: true
+ *            schema:
+ *              type: string
+ *          responses:
+ *              "200":
+ *                  description: Articulo encontrado.
+ *              "404":
+ *                  desccription: Error al encontrar el articulo
+ * 
+ */
 routerArticle.get("/:id", ArticleController.getById );
+
+/** 
+ * @openapi 
+ * /create:
+ *      post:
+ *          tags:
+ *              - articles 
+ *          summary: "creando articulo"
+ *          description: Creando un articulo especifico
+ *          requestBody:
+ *              content:
+ *                  application/json:
+ *                      schema:
+ *                          $ref: "#/components/schemas/articles"
+ *          responses:
+ *              "200":
+ *                  description: Articulo creado con exito.
+ *              "404":
+ *                  desccription: Error al crear el articulo
+ * 
+ */
 routerArticle.post("/create",ArticleController.create );
 
 /** 
