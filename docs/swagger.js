@@ -1,7 +1,7 @@
 const swaggerJsDoc = require("swagger-jsdoc");
 
 /**
- *  Opciones
+ * Configuration API
  */
 const swaggerDefinition ={
     openapi: "3.0.0",
@@ -19,7 +19,7 @@ const swaggerDefinition ={
         schemas: {
             Article:{
                 type: "object",
-                required: ["title, content"],
+                required: ["title", "content"],
                 properties:{
                     title:{
                         type: "string"
@@ -42,7 +42,7 @@ const swaggerDefinition ={
 
 
 /**
- *  Opciones
+ *  Options
  */
 const options = {
     swaggerDefinition,
