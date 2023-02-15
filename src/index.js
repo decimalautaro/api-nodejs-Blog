@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
 
-app.use("/documentation", swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
+app.use("/api/documentation", swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
 app.use ("/api/articles", routerArticle);
 
 

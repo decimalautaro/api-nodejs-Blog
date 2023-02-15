@@ -1,3 +1,4 @@
+const { format } = require("path");
 const swaggerJsDoc = require("swagger-jsdoc");
 
 /**
@@ -17,7 +18,7 @@ const swaggerDefinition ={
     components: {
 
         schemas: {
-            Article:{
+            articles:{
                 type: "object",
                 required: ["title", "content"],
                 properties:{
@@ -28,7 +29,8 @@ const swaggerDefinition ={
                         type: "string"
                     },
                     date:{
-                        type: "date",
+                        type: "string",
+                        format: "date"
                     },
                     image:{
                         type: "string",
@@ -47,7 +49,7 @@ const swaggerDefinition ={
 const options = {
     swaggerDefinition,
     apis:[
-        "./routes/*.js"
+        "./src/routes/*.js"
     ]
 };
 
