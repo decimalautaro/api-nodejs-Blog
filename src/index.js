@@ -3,11 +3,10 @@ const {connect} = require('mongoose');
 const cors = require("cors");
 const swaggerUI = require("swagger-ui-express");
 const openApiConfiguration = require("../docs/swagger")
+const {routerArticle} = require("./routes/article-router.js");
+const { routerUser } = require("./routes/user-router");
 
 require('dotenv').config();
-
-const {routerArticle} = require("./routes/article-router.js");
-
 
 const app = express();
 
@@ -19,6 +18,7 @@ app.use(express.urlencoded({extended: true}));
 
 app.use("/api/documentation", swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
 app.use ("/api/articles", routerArticle);
+app.use("/api/users", routerUser)
 
 
 
