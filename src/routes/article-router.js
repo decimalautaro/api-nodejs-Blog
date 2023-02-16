@@ -194,6 +194,28 @@ routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController
  * 
  */
 routerArticle.get("/image/:file", ArticleController.image );
+
+/** 
+ * @openapi 
+ * /search/{search}:
+ *      get:
+ *          tags:
+ *              - articles 
+ *          summary: "Buscar titulo o contenido"
+ *          description: Obteniendo un titulo o contenido de la lista de articulos 
+ *          parameters:
+ *          - name: search
+ *            in: path
+ *            required: true
+ *            schema:
+ *              type: string
+ *          responses:
+ *              "200":
+ *                  description: Busqueda realizada con exito.
+ *              "404":
+ *                  desccription: Error al realizar la busqueda.
+ * 
+ */
 routerArticle.get("/search/:search", ArticleController.search );
 
 
