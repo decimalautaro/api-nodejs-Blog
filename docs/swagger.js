@@ -27,7 +27,11 @@ const swaggerDefinition ={
                     },
                     content:{
                         type: "string"
+                    },
+                    image: {
+                        type: "string"
                     }
+
                 }
             }
         }

@@ -104,9 +104,40 @@ routerArticle.post("/create",ArticleController.create );
  */
 routerArticle.delete("/delete/:id",ArticleController.remove );
 routerArticle.put("/edit/:id",ArticleController.edit );
+
+/**
+ * @openapi
+ * /upload-image/{id}:
+ *      post:
+ *          tags:
+ *              - articles
+ *          summary: "subiendo imagen"
+ *          description: subiendo una imagen a un articulo especifico.
+ *          parameters:     
+ *          - name: id
+ *            in: path
+ *            required: true
+ *          requestBody:
+ *              content:
+ *                  multipart/form-data:
+ *                      schema:
+ *                          type: object
+ *                          properties:
+ *                              file:
+ *                                  type: string
+ *                                  format: binary
+ *          responses:
+ *              "200":
+ *                  description: Retorna la imagen insertada en el articulo.
+ *              "404":
+ *                  description: Error al cargar la foto.
+ *                              
+ *          
+ *      
+ */
 routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController.uploadImage );
 routerArticle.get("/image/:file", ArticleController.image );
 routerArticle.get("/search/:search", ArticleController.search );
 
 
-module.exports = {routerArticle}
+module.exports = {routerArticle};
