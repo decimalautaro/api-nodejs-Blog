@@ -18,7 +18,7 @@ const upload = multer({storage: storage});
 
 /**
  * @openapi
- * /:
+ * /all-items:
  *  get:
  *      tags:
  *          - articles
@@ -34,11 +34,11 @@ const upload = multer({storage: storage});
  *          "404":
  *              description: "No se encontraron articulos."
  */
-routerArticle.get("/", ArticleController.getAll );
+routerArticle.get("/all-items", ArticleController.getAll );
 
 /** 
  * @openapi 
- * /{id}:
+ * /byId/{id}:
  *      get:
  *          tags:
  *              - articles 
@@ -57,11 +57,11 @@ routerArticle.get("/", ArticleController.getAll );
  *                  desccription: Error al encontrar el articulo
  * 
  */
-routerArticle.get("/:id", ArticleController.getById );
+routerArticle.get("/byId/:id", ArticleController.getById );
 
 /** 
  * @openapi 
- * /create:
+ * /create-article:
  *      post:
  *          tags:
  *              - articles 
@@ -79,11 +79,11 @@ routerArticle.get("/:id", ArticleController.getById );
  *                  desccription: Error al crear el articulo
  * 
  */
-routerArticle.post("/create",ArticleController.create );
+routerArticle.post("/create-article",ArticleController.create );
 
 /** 
  * @openapi 
- * /delete/{id}:
+ * /delete-article/{id}:
  *      delete:
  *          tags:
  *              - articles 
@@ -102,11 +102,11 @@ routerArticle.post("/create",ArticleController.create );
  *                  desccription: Error al eliminar el articulo
  * 
  */
-routerArticle.delete("/delete/:id",ArticleController.remove );
+routerArticle.delete("/delete-article/:id",ArticleController.remove );
 
 /**
  * @openapi
- * /edit/{id}:
+ * /edit-article/{id}:
  *    put:
  *      tags:
  *        - articles
@@ -138,7 +138,7 @@ routerArticle.delete("/delete/:id",ArticleController.remove );
  *      '404':
  *        description: No se pudo actualizar el registro '403'
  */
-routerArticle.put("/edit/:id",ArticleController.edit );
+routerArticle.put("/edit-article/:id",ArticleController.edit );
 
 /**
  * @openapi
