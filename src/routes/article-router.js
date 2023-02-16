@@ -103,6 +103,41 @@ routerArticle.post("/create",ArticleController.create );
  * 
  */
 routerArticle.delete("/delete/:id",ArticleController.remove );
+
+/**
+ * @openapi
+ * /edit/{id}:
+ *    put:
+ *      tags:
+ *        - articles
+ *      summary: "Actualizando articulo"
+ *      description: Actualizar articulo y obtener el detalle del registro
+ *      parameters:
+ *      - name: id
+ *        in: path
+ *        required: true
+ *        schema:
+ *          type: string
+ *      responses:
+ *        '200':
+ *          description: Retorna el articulo actualizado en la coleccion.
+ *        '404':
+ *          description: Error al actualizar el articulo.
+ *      requestBody:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                 $ref: "#/components/schemas/articles"
+ *    responses:
+ *      '200':
+ *        description: Retorna el articulo insertado en la coleccion con stado '200'
+ *        content:
+ *           application/json:
+ *             schema:
+ *                $ref: '#/components/schemas/articles'
+ *      '404':
+ *        description: No se pudo actualizar el registro '403'
+ */
 routerArticle.put("/edit/:id",ArticleController.edit );
 
 /**

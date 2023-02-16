@@ -30,6 +30,10 @@ const swaggerDefinition ={
                     },
                     image: {
                         type: "string"
+                    },
+                    date: {
+                        type: "string",
+                        format: Date
                     }
 
                 }
