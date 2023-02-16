@@ -12,7 +12,8 @@ const swaggerDefinition ={
     },
     servers: [
         {
-            url: "http://localhost:3000/api/articles"
+            url: "http://localhost:3000/api/articles",
+            url: "http://localhost:3000/api/users"
         }
     ],
     components: {
@@ -33,12 +34,33 @@ const swaggerDefinition ={
                     },
                     date: {
                         type: "string",
-                        format: Date
+                        format: Date.now
                     }
 
                 }
-            }
-        }
+            },
+            users:{
+                type: "object",
+                required: ["name", "age", "email", "password"],
+                properties:{
+                    name:{
+                        type: "string"
+                    },
+                    email: {
+                        type: "string",
+                        format: "email"
+                    },
+                    password: {
+                        type: "string",
+                        format: "password"
+                    },
+                    
+
+                }
+            },
+            
+            
+        },
     }
 }
 
