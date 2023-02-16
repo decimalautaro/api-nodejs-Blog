@@ -171,6 +171,28 @@ routerArticle.put("/edit/:id",ArticleController.edit );
  *      
  */
 routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController.uploadImage );
+
+/** 
+ * @openapi 
+ * /image/{file}:
+ *      get:
+ *          tags:
+ *              - articles 
+ *          summary: "Buscar imagen"
+ *          description: Obteniendo un imagen del listado de articulos
+ *          parameters:
+ *          - name: file
+ *            in: path
+ *            required: true
+ *            schema:
+ *              type: string
+ *          responses:
+ *              "200":
+ *                  description: Imagen encontrada.
+ *              "404":
+ *                  desccription: Error al encontrar la imagen.
+ * 
+ */
 routerArticle.get("/image/:file", ArticleController.image );
 routerArticle.get("/search/:search", ArticleController.search );
 
