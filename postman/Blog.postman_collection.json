@@ -7,15 +7,64 @@
 	},
 	"item": [
 		{
-			"name": "method search",
+			"name": "Articles",
 			"item": [
 				{
-					"name": "search-Image",
+					"name": "method search",
+					"item": [
+						{
+							"name": "search-Image",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/articles/image/article1676398385625nodejs.png",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"articles",
+										"image",
+										"article1676398385625nodejs.png"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search-Article",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:3000/api/articles/search/prueba",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"articles",
+										"search",
+										"prueba"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "getById",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/articles/image/article1676398385625nodejs.png",
+							"raw": "http://localhost:3000/api/articles/63ebce8143d3b3489d91f331",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -24,20 +73,19 @@
 							"path": [
 								"api",
 								"articles",
-								"image",
-								"article1676398385625nodejs.png"
+								"63ebce8143d3b3489d91f331"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "search-Article",
+					"name": "getAll",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/articles/search/prueba",
+							"raw": "http://localhost:3000/api/articles/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -46,8 +94,146 @@
 							"path": [
 								"api",
 								"articles",
-								"search",
-								"prueba"
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "Articulo 10",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "Prueba 10",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/articles/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "upload-Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/home/lautaro/Descargas/react.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/articles/upload-image/63ebce7b43d3b3489d91f32f",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"upload-image",
+								"63ebce7b43d3b3489d91f32f"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/articles/delete/63ea5dc65c5b7ecfdbe225da",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"delete",
+								"63ea5dc65c5b7ecfdbe225da"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "PROBANDO 9",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "TITULO 9!!",
+									"type": "text"
+								},
+								{
+									"key": "date",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/articles/edit/63ebce8143d3b3489d91f331",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"articles",
+								"edit",
+								"63ebce8143d3b3489d91f331"
 							]
 						}
 					},
@@ -56,185 +242,163 @@
 			]
 		},
 		{
-			"name": "getById",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/articles/63ebce8143d3b3489d91f331",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						"63ebce8143d3b3489d91f331"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "getAll",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/articles/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "title",
-							"value": "Articulo 10",
-							"type": "text"
+			"name": "Users",
+			"item": [
+				{
+					"name": "create-user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "lautaro5",
+									"type": "text"
+								},
+								{
+									"key": "age",
+									"value": "28",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "email",
+									"value": "decimalautaro@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
 						},
-						{
-							"key": "content",
-							"value": "Prueba 10",
-							"type": "text"
-						},
-						{
-							"key": "",
-							"value": "",
-							"type": "text",
-							"disabled": true
+						"url": {
+							"raw": "http://localhost:3000/api/users/create-user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"create-user"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/articles/create",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						"create"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "upload-Image",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "file",
-							"type": "file",
-							"src": "/home/lautaro/Descargas/react.png"
+				{
+					"name": "getAll-users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/all-users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"all-users"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/articles/upload-image/63ebce7b43d3b3489d91f32f",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						"upload-image",
-						"63ebce7b43d3b3489d91f32f"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:3000/api/articles/delete/63ea5dc65c5b7ecfdbe225da",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						"delete",
-						"63ea5dc65c5b7ecfdbe225da"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update",
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "title",
-							"value": "PROBANDO 9",
-							"type": "text"
-						},
-						{
-							"key": "content",
-							"value": "TITULO 9!!",
-							"type": "text"
-						},
-						{
-							"key": "date",
-							"value": "",
-							"type": "text",
-							"disabled": true
+				{
+					"name": "getById-user",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/byId/63ee704c45532ebb2538ca34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"byId",
+								"63ee704c45532ebb2538ca34"
+							]
 						}
-					]
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:3000/api/articles/edit/63ebce8143d3b3489d91f331",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3000",
-					"path": [
-						"api",
-						"articles",
-						"edit",
-						"63ebce8143d3b3489d91f331"
-					]
+				{
+					"name": "delete-user",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/api/users/delete-user/63ee704c45532ebb2538ca34",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"delete-user",
+								"63ee704c45532ebb2538ca34"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit-user",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "cambiando password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/users/edit-user/63ee705d45532ebb2538ca3a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"users",
+								"edit-user",
+								"63ee705d45532ebb2538ca3a"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
