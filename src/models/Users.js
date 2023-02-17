@@ -13,10 +13,14 @@ const UserSchema = Schema({
         type: String,
         required: true
     },
-    date:{
-        type: Date,
-        default: Date.now
-    },
-})
+    role: {
+        type: ["user", "admin"],
+        default: "user",
+      },
+},
+  {
+    timestamps: true,
+  }
+  )
 
 module.exports = model ("User", UserSchema)
