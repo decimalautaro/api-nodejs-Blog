@@ -22,7 +22,7 @@ app.use("/api/users", routerUser)
 
 
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const NAME_DB = process.env.NAME_DB;
 
 const run = async ()=>{
