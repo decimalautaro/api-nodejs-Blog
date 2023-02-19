@@ -6,7 +6,7 @@ const validateResult = (req, res, next) =>{
         return next();
     } catch (error) {
         res.status(400);
-        res.send({message: "faltan datos por enviar."});
+        res.send({message: "Faltan datos por enviar."});
     }
 }
 
