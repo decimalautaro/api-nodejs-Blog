@@ -1,5 +1,7 @@
 const {Router} = require("express");
 const  ArticleController = require("../controllers/ArticleController");
+const { validateArticle } = require("../validators/validate-article")
+
 const multer = require("multer");
 
 const routerArticle = Router();
@@ -18,7 +20,7 @@ const upload = multer({storage: storage});
 
 /**
  * @openapi
- * /all-items:
+ * /articles/all-items:
  *  get:
  *      tags:
  *          - articles
@@ -38,7 +40,7 @@ routerArticle.get("/all-items", ArticleController.getAll );
 
 /** 
  * @openapi 
- * /byId/{id}:
+ * /articles/byId/{id}:
  *      get:
  *          tags:
  *              - articles 
@@ -61,7 +63,7 @@ routerArticle.get("/byId/:id", ArticleController.getById );
 
 /** 
  * @openapi 
- * /create-article:
+ * /articles/create-article:
  *      post:
  *          tags:
  *              - articles 
@@ -75,15 +77,18 @@ routerArticle.get("/byId/:id", ArticleController.getById );
  *          responses:
  *              "200":
  *                  description: Articulo creado con exito.
+ *              "400":
+ *                  desccription: Faltan datos por enviar.
+ * 
  *              "404":
  *                  desccription: Error al crear el articulo
  * 
  */
-routerArticle.post("/create-article",ArticleController.create );
+routerArticle.post("/create-article",validateArticle ,ArticleController.create );
 
 /** 
  * @openapi 
- * /delete-article/{id}:
+ * /articles/delete-article/{id}:
  *      delete:
  *          tags:
  *              - articles 
@@ -106,7 +111,7 @@ routerArticle.delete("/delete-article/:id",ArticleController.remove );
 
 /**
  * @openapi
- * /edit-article/{id}:
+ * /articles/edit-article/{id}:
  *    put:
  *      tags:
  *        - articles
@@ -138,11 +143,11 @@ routerArticle.delete("/delete-article/:id",ArticleController.remove );
  *      '404':
  *        description: No se pudo actualizar el registro '403'
  */
-routerArticle.put("/edit-article/:id",ArticleController.edit );
+routerArticle.put("/edit-article/:id",validateArticle ,ArticleController.edit );
 
 /**
  * @openapi
- * /upload-image/{id}:
+ * /articles/upload-image/{id}:
  *      post:
  *          tags:
  *              - articles
@@ -174,7 +179,7 @@ routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController
 
 /** 
  * @openapi 
- * /image/{file}:
+ * /articles/image/{file}:
  *      get:
  *          tags:
  *              - articles 
@@ -197,7 +202,7 @@ routerArticle.get("/image/:file", ArticleController.image );
 
 /** 
  * @openapi 
- * /search/{search}:
+ * /articles/search/{search}:
  *      get:
  *          tags:
  *              - articles 
