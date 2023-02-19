@@ -1,21 +1,10 @@
 const Article = require("../models/Articles");
-const { validateArticle } = require("../validators/validate");
+const { validateArticle } = require("../validators/validate-article");
 const fs = require("fs");
 const path = require("path");
 
 const create = (req, res) =>{
     const params = req.body;
-
-    try{
-        
-        validateArticle(params)
-
-    }catch (error) {
-        return res.status(400).json({
-            status:"error",
-            message: "faltan datos por enviar"
-        })
-    }
 
     const article = new Article(params);
     article.save((error)=>{
@@ -93,17 +82,6 @@ const remove = (req, res)=>{
 const edit = (req, res) =>{
     const { id } = req.params;
     const params= req.body;
-
-    try{
-        
-        validateArticle(params)
-        
-    }catch (error) {
-        return res.status(400).json({
-            status:"error",
-            message: "faltan datos por enviar"
-        })
-    }
     
     Article.findOneAndUpdate({_id : id}, params, {new: true}, (error, articleUpdate)=>{
         
