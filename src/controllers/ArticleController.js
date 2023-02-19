@@ -1,5 +1,5 @@
 const Article = require("../models/Articles");
-const { validateArticle } = require("../helpers/validate");
+const { validateArticle } = require("../validators/validate");
 const fs = require("fs");
 const path = require("path");
 
