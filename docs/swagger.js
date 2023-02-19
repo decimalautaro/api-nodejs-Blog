@@ -1,4 +1,4 @@
-const { format } = require("path");
+const {path} = require("path");
 const swaggerJsDoc = require("swagger-jsdoc");
 
 /**
@@ -12,16 +12,10 @@ const swaggerDefinition ={
     },
     servers: [
         {
-            url: "http://localhost:3000/api/articles"
+            url: "http://localhost:3000/api"
         },
-
-        {
-            
-            url: "http://localhost:3000/api/users"
-        }
     ],
     components: {
-
         schemas: {
             articles:{
                 type: "object",
