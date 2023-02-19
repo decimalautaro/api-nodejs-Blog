@@ -9,15 +9,14 @@ const ArticleSchema = Schema({
         type: String,
         required: true
     },
-    date:{
-        type: Date,
-        default: Date.now
-       
-    },
     image:{
         type: String,
         default: "default.png"
     }
-})
+},
+    {
+        timestamps: true,
+    }
+)
 
 module.exports = model ("Article", ArticleSchema)
