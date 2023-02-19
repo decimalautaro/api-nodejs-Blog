@@ -29,17 +29,47 @@ npm run dev
 
 ```
 
-## __Imagenes de swagger:__
+# __Imagenes de swagger:__
 
-### _Swagger_
+## __Swagger__
 ![Swagger](./docs//img/swagger.png)
 
-### _Documentacion de articulos:_
+## __Documentacion de articulos:__
 
 ![Articles.](./docs//img/articles.png)
 
+## _Todos los articulos_:
+
+![all-items1.](./docs//img/all-items1.png)
+![all-items2.](./docs//img/all-items2.png)
+![all-items3.](./docs//img/all-items3.png)
+
+## __Articulo por ID:__
+
+![all-items1.](./docs//img/articleById1.png)
+![all-items1.](./docs//img/articleById2.png)
+![all-items1.](./docs//img/articleById3.png)
+
+## __Crear Articulo:__
+
+![all-items1.](./docs//img/crear-article1.png)
+![all-items1.](./docs//img/crear-article2.png)
+![all-items1.](./docs//img/crear-article3.png)
+
+## __Eliminar Articulo:__
+
+![all-items1.](./docs//img/delete-article1.png)
+![all-items1.](./docs//img/delete-article2.png)
+![all-items1.](./docs//img/delete-article3.png)
+
+## __Actualizar Articulo:__
+
+![all-items1.](./docs//img/update-article1.png)
+![all-items1.](./docs//img/update-article2.png)
+![all-items1.](./docs//img/update-article3.png)
 
 
-### _Documentacion de usuarios:_
+
+## __Documentacion de usuarios:__
 
 ![Users.](./docs//img/users.png)
