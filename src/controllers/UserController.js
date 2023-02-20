@@ -36,8 +36,6 @@ const login = async (req, res) => {
   try{
     const params = req.body
     const user = await User.findOne({email: params.email})
-    console.log(user)
-    console.log(params)
 
     if(!user){
       handleHttpError(res, "El usuario no existe.", 404);
@@ -52,10 +50,10 @@ const login = async (req, res) => {
       handleHttpError(res, "Password incorrecta.", 401);
       return
     }
-
+    user.set("password", undefined, {strict: false})
     const data = {
       token: await tokenSign(user),
-      user
+       user
     }
 
     res.send({data})
