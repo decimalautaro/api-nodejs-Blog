@@ -50,6 +50,6 @@ routerUser.post("/register", validateRegister ,UserController.register );
  *                  description: Error al logear el usuario.
  * 
  */
-// routerUser.post("/login", validateRegister ,UserController.login );
+routerUser.post("/login", validateLogin ,UserController.login );
 
 module.exports = {routerUser};
