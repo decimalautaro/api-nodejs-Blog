@@ -16,8 +16,11 @@ const create = (req, res) =>{
         }
     })
 
+    const user = req.user;
+
     return res.status(200).json({
         status: "success",
+        user: user,
         article: article,
         message: "articulo creado con exito"
 
@@ -32,7 +35,7 @@ const getAll = (req, res) =>{
                 message: "no se han encontrado articulos"
             })
         }
-
+        
         return res.status(200).send({
             status:"success",
             articles
