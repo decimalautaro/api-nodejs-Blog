@@ -17,10 +17,10 @@ const UserSchema = Schema({
         type: ["user", "admin"],
         default: "user",
       },
-},
-  {
+  },
+    {
     timestamps: true,
-  }
-  )
+    }
+)
 
 module.exports = model ("User", UserSchema)
