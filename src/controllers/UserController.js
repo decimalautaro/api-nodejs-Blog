@@ -40,7 +40,7 @@ const login = async (req, res) => {
     console.log(params)
 
     if(!user){
-      handleHttpError(res, "USER_NOT_EXISTS", 404);
+      handleHttpError(res, "El usuario no existe.", 404);
       return
     }
 
@@ -49,7 +49,7 @@ const login = async (req, res) => {
     const check = await compare(params.password, hashPassword)
 
     if(!check){
-      handleHttpError(res, "PASSWORD_INVALID", 401);
+      handleHttpError(res, "Password incorrecta.", 401);
       return
     }
 
@@ -64,7 +64,7 @@ const login = async (req, res) => {
 
   }catch(e){
     console.log(e)
-    handleHttpError(res, "ERROR_LOGIN_USER")
+    handleHttpError(res, "Error al logear.")
   }
 
 }
