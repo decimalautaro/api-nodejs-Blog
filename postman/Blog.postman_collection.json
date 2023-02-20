@@ -64,7 +64,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/articles/63ebce8143d3b3489d91f331",
+							"raw": "http://localhost:3000/api/articles/byId/63ed2f48366819cf45c9de1f",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -73,7 +73,8 @@
 							"path": [
 								"api",
 								"articles",
-								"63ebce8143d3b3489d91f331"
+								"byId",
+								"63ed2f48366819cf45c9de1f"
 							]
 						}
 					},
@@ -85,7 +86,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/articles/",
+							"raw": "http://localhost:3000/api/articles/all-items",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -94,7 +95,7 @@
 							"path": [
 								"api",
 								"articles",
-								""
+								"all-items"
 							]
 						}
 					},
@@ -119,7 +120,7 @@
 									"type": "text"
 								},
 								{
-									"key": "",
+									"key": "r",
 									"value": "",
 									"type": "text",
 									"disabled": true
@@ -127,7 +128,7 @@
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/articles/create",
+							"raw": "http://localhost:3000/api/articles/create-article",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -136,7 +137,7 @@
 							"path": [
 								"api",
 								"articles",
-								"create"
+								"create-article"
 							]
 						}
 					},
@@ -245,7 +246,7 @@
 			"name": "Users",
 			"item": [
 				{
-					"name": "create-user",
+					"name": "register",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -254,7 +255,17 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "lautaro5",
+									"value": "LAUTA",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "mari@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "maria",
 									"type": "text"
 								},
 								{
@@ -262,21 +273,11 @@
 									"value": "28",
 									"type": "text",
 									"disabled": true
-								},
-								{
-									"key": "email",
-									"value": "decimalautaro@gmail.com",
-									"type": "text"
-								},
-								{
-									"key": "password",
-									"value": "123",
-									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/create-user",
+							"raw": "http://localhost:3000/api/users/register",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -285,104 +286,46 @@
 							"path": [
 								"api",
 								"users",
-								"create-user"
+								"register"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "getAll-users",
+					"name": "login",
 					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/users/all-users",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"all-users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getById-user",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/users/byId/63ee704c45532ebb2538ca34",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"byId",
-								"63ee704c45532ebb2538ca34"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete-user",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:3000/api/users/delete-user/63ee704c45532ebb2538ca34",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "3000",
-							"path": [
-								"api",
-								"users",
-								"delete-user",
-								"63ee704c45532ebb2538ca34"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "edit-user",
-					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "urlencoded",
 							"urlencoded": [
 								{
-									"key": "name",
-									"value": "1",
-									"type": "text"
-								},
-								{
 									"key": "email",
-									"value": "1",
+									"value": "mari@gmail.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "cambiando password",
+									"value": "maria",
 									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/users/edit-user/63ee705d45532ebb2538ca3a",
+							"raw": "http://localhost:3000/api/users/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -391,8 +334,7 @@
 							"path": [
 								"api",
 								"users",
-								"edit-user",
-								"63ee705d45532ebb2538ca3a"
+								"login"
 							]
 						}
 					},

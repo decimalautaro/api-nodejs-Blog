@@ -53,7 +53,6 @@ const login = async (req, res) => {
       return
     }
 
-    user.set('password', undefined, {strict:false})
     const data = {
       token: await tokenSign(user),
       user
