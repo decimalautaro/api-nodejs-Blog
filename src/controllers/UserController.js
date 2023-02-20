@@ -1,6 +1,7 @@
-const User = require("../models/Users");
 const { encrypt, compare } = require ("../utils/handlePassword")
 const { tokenSign } = require("../utils/handleJWT")
+const { handleHttpError } = require("../utils/handleError");
+const  User = require("../models/Users");
 
 const register = async(req, res) =>{
     const params = req.body;
@@ -31,6 +32,45 @@ const register = async(req, res) =>{
     })
 }
 
+const login = async (req, res) => {
+  try{
+    const params = req.body
+    const user = await User.findOne({email: params.email})
+    console.log(user)
+    console.log(params)
+
+    if(!user){
+      handleHttpError(res, "USER_NOT_EXISTS", 404);
+      return
+    }
+
+    const hashPassword = user.get('password');
+
+    const check = await compare(params.password, hashPassword)
+
+    if(!check){
+      handleHttpError(res, "PASSWORD_INVALID", 401);
+      return
+    }
+
+    user.set('password', undefined, {strict:false})
+    const data = {
+      token: await tokenSign(user),
+      user
+    }
+
+    res.send({data})
+
+
+  }catch(e){
+    console.log(e)
+    handleHttpError(res, "ERROR_LOGIN_USER")
+  }
+
+}
+
+
 module.exports = {
     register,
+    login
 }
