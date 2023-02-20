@@ -1,6 +1,7 @@
 const {Router} = require("express");
 const  ArticleController = require("../controllers/ArticleController");
-const { validateArticle } = require("../validators/validate-article")
+const { validateArticle } = require("../validators/validate-article");
+const { authMIddleware } = require("../middleware/session");
 
 const multer = require("multer");
 
@@ -84,7 +85,7 @@ routerArticle.get("/byId/:id", ArticleController.getById );
  *                  desccription: Error al crear el articulo
  * 
  */
-routerArticle.post("/create-article",validateArticle ,ArticleController.create );
+routerArticle.post("/create-article", authMIddleware, validateArticle,ArticleController.create );
 
 /** 
  * @openapi 
@@ -107,7 +108,7 @@ routerArticle.post("/create-article",validateArticle ,ArticleController.create )
  *                  desccription: Error al eliminar el articulo
  * 
  */
-routerArticle.delete("/delete-article/:id",ArticleController.remove );
+routerArticle.delete("/delete-article/:id", authMIddleware, ArticleController.remove );
 
 /**
  * @openapi
@@ -143,7 +144,7 @@ routerArticle.delete("/delete-article/:id",ArticleController.remove );
  *      '404':
  *        description: No se pudo actualizar el registro '403'
  */
-routerArticle.put("/edit-article/:id",validateArticle ,ArticleController.edit );
+routerArticle.put("/edit-article/:id", validateArticle, authMIddleware, ArticleController.edit );
 
 /**
  * @openapi
@@ -175,7 +176,7 @@ routerArticle.put("/edit-article/:id",validateArticle ,ArticleController.edit );
  *          
  *      
  */
-routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController.uploadImage );
+routerArticle.post("/upload-image/:id",[upload.single("file")], authMIddleware, ArticleController.uploadImage );
 
 /** 
  * @openapi 
@@ -198,7 +199,7 @@ routerArticle.post("/upload-image/:id",[upload.single("file")],ArticleController
  *                  desccription: Error al encontrar la imagen.
  * 
  */
-routerArticle.get("/image/:file", ArticleController.image );
+routerArticle.get("/image/:file", authMIddleware, ArticleController.image );
 
 /** 
  * @openapi 
