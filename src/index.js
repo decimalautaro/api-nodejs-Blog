@@ -22,8 +22,9 @@ app.use("/api/users", routerUser)
 
 
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 const NAME_DB = process.env.NAME_DB;
+
 
 const run = async ()=>{
     await connect("mongodb://localhost:27017/" + NAME_DB);
