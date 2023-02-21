@@ -1,7 +1,9 @@
 const {Router} = require("express");
 const  ArticleController = require("../controllers/ArticleController");
 const { validateArticle } = require("../validators/validate-article");
-const { authMIddleware } = require("../middleware/session");
+const { authMiddleware } = require("../middleware/session");
+const { checkRol } = require("../middleware/rol");
+
 
 const multer = require("multer");
 
@@ -85,7 +87,7 @@ routerArticle.get("/byId/:id", ArticleController.getById );
  *                  desccription: Error al crear el articulo
  * 
  */
-routerArticle.post("/create-article", authMIddleware, validateArticle,ArticleController.create );
+routerArticle.post("/create-article", authMiddleware, checkRol(["admin"]), validateArticle,ArticleController.create );
 
 /** 
  * @openapi 
@@ -108,7 +110,7 @@ routerArticle.post("/create-article", authMIddleware, validateArticle,ArticleCon
  *                  desccription: Error al eliminar el articulo
  * 
  */
-routerArticle.delete("/delete-article/:id", authMIddleware, ArticleController.remove );
+routerArticle.delete("/delete-article/:id", authMiddleware, checkRol(["admin"]), ArticleController.remove );
 
 /**
  * @openapi
@@ -144,7 +146,7 @@ routerArticle.delete("/delete-article/:id", authMIddleware, ArticleController.re
  *      '404':
  *        description: No se pudo actualizar el registro '403'
  */
-routerArticle.put("/edit-article/:id", validateArticle, authMIddleware, ArticleController.edit );
+routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol(["admin"]), ArticleController.edit );
 
 /**
  * @openapi
@@ -176,7 +178,7 @@ routerArticle.put("/edit-article/:id", validateArticle, authMIddleware, ArticleC
  *          
  *      
  */
-routerArticle.post("/upload-image/:id",[upload.single("file")], authMIddleware, ArticleController.uploadImage );
+routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware,  ArticleController.uploadImage );
 
 /** 
  * @openapi 
@@ -199,7 +201,7 @@ routerArticle.post("/upload-image/:id",[upload.single("file")], authMIddleware, 
  *                  desccription: Error al encontrar la imagen.
  * 
  */
-routerArticle.get("/image/:file", authMIddleware, ArticleController.image );
+routerArticle.get("/image/:file", authMiddleware, ArticleController.image );
 
 /** 
  * @openapi 
