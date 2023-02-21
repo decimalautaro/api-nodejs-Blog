@@ -16,23 +16,13 @@ const swaggerDefinition ={
         },
     ],
     components: {
+        securitySchemes:{
+            bearerAuth:{
+                type: "http",
+                scheme: "bearer",
+            }
+        },
         schemas: {
-            articles:{
-                type: "object",
-                required: ["title", "content"],
-                properties:{
-                    title:{
-                        type: "string"
-                    },
-                    content:{
-                        type: "string"
-                    },
-                    image: {
-                        type: "string"
-                    },
-
-                }
-            },
             users:{
                 type: "object",
                 required: ["name", "email", "password"],
@@ -49,6 +39,22 @@ const swaggerDefinition ={
                         format: "password"
                     },
                     
+
+                }
+            },
+            articles:{
+                type: "object",
+                required: ["title", "content"],
+                properties:{
+                    title:{
+                        type: "string"
+                    },
+                    content:{
+                        type: "string"
+                    },
+                    image: {
+                        type: "string"
+                    },
 
                 }
             },
