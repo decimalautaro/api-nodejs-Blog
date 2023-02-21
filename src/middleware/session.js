@@ -2,7 +2,7 @@ const { handleHttpError } = require("../utils/handleError")
 const { verifyToken } = require("../utils/handleJWT")
 const User = require("../models/Users")
 
-const authMIddleware = async(req, res, next)=>{
+const authMiddleware = async(req, res, next)=>{
     try {
         
         if (!req.headers.authorization) {
@@ -27,4 +27,4 @@ const authMIddleware = async(req, res, next)=>{
     }
 }
 
-module.exports = { authMIddleware }
+module.exports = { authMiddleware }
