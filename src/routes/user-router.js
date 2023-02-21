@@ -5,7 +5,7 @@ const routerUser= Router();
 
 /** 
  * @openapi 
- * /users/register:
+ * /auth/register:
  *      post:
  *          tags:
  *              - users 
@@ -30,7 +30,7 @@ routerUser.post("/register", validateRegister ,UserController.register );
 
 /** 
  * @openapi 
- * /users/login:
+ * /auth/login:
  *      post:
  *          tags:
  *              - users 

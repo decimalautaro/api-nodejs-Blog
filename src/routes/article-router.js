@@ -28,7 +28,9 @@ const upload = multer({storage: storage});
  *      tags:
  *          - articles
  *      summary: "listar articulos"
- *      description: Se obtienen todos los articulos creados
+ *      description: Se obtienen todos los articulos creados.
+ *      security:
+ *          - bearerAuth: []
  *      responses:
  *          "200":
  *              description: Success
@@ -48,7 +50,9 @@ routerArticle.get("/all-items", ArticleController.getAll );
  *          tags:
  *              - articles 
  *          summary: "Detalle del articulo"
- *          description: Obteniendo un articulo especifico
+ *          description: Obteniendo un articulo especifico.
+ *          security:
+ *              - bearerAuth: []
  *          parameters:
  *          - name: id
  *            in: path
@@ -71,7 +75,9 @@ routerArticle.get("/byId/:id", ArticleController.getById );
  *          tags:
  *              - articles 
  *          summary: "creando articulo"
- *          description: Creando un articulo especifico
+ *          description: Creando un articulo especifico.
+ *          security:
+ *              - bearerAuth: []
  *          requestBody:
  *              content:
  *                  application/json:
@@ -96,7 +102,9 @@ routerArticle.post("/create-article", authMiddleware, checkRol(["admin"]), valid
  *          tags:
  *              - articles 
  *          summary: "eliminar articulos"
- *          description: Eliminar un articulo especifico
+ *          description: Eliminar un articulo especifico.
+ *          security:
+ *              - bearerAuth: []
  *          parameters:
  *          - name: id
  *            in: path
@@ -119,7 +127,9 @@ routerArticle.delete("/delete-article/:id", authMiddleware, checkRol(["admin"]),
  *      tags:
  *        - articles
  *      summary: "Actualizando articulo"
- *      description: Actualizar articulo y obtener el detalle del registro
+ *      description: Actualizar articulo y obtener el detalle del registro.
+ *      security:
+ *          - bearerAuth: []
  *      parameters:
  *      - name: id
  *        in: path
@@ -156,6 +166,8 @@ routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol
  *              - articles
  *          summary: "subiendo imagen"
  *          description: subiendo una imagen a un articulo especifico.
+ *          security:
+ *              - bearerAuth: []
  *          parameters:     
  *          - name: id
  *            in: path
@@ -178,7 +190,7 @@ routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol
  *          
  *      
  */
-routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware,  ArticleController.uploadImage );
+routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware, checkRol(["admin"]), ArticleController.uploadImage );
 
 /** 
  * @openapi 
@@ -187,7 +199,9 @@ routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware, 
  *          tags:
  *              - articles 
  *          summary: "Buscar imagen"
- *          description: Obteniendo un imagen del listado de articulos
+ *          description: Obteniendo un imagen del listado de articulos.
+ *          security:
+ *              - bearerAuth: []
  *          parameters:
  *          - name: file
  *            in: path
@@ -210,7 +224,9 @@ routerArticle.get("/image/:file", authMiddleware, ArticleController.image );
  *          tags:
  *              - articles 
  *          summary: "Buscar titulo o contenido"
- *          description: Obteniendo un titulo o contenido de la lista de articulos 
+ *          description: Obteniendo un titulo o contenido de la lista de articulos.
+ *          security:
+ *              - bearerAuth: [] 
  *          parameters:
  *          - name: search
  *            in: path
