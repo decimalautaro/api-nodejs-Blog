@@ -1,8 +1,14 @@
 # DOCUMENTACIÓN API REST BLOG.
 
 ### En este documento se encuentra la documentacion de una API REST hecha con Nodejs, Express y Mongoose.
+
+## Descripcion:
+API REST de blog que contiene las entidades user y article las cuales estan relacionadas donde un usuario puede tener varios articulos (**Relación 1 a N**).
+
+Sus rutas se encuentran protegidas mediante JWT y con permisos para usuarios que tengan roles tales como _"admin" o "user"_.
+
   
-### __Usando librerias como:__  
+### __Se usarón librerias como:__  
 
 + ***Express-validator*** para validar los datos ingresador por teclado. 
 
