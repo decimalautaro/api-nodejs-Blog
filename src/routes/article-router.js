@@ -1,25 +1,23 @@
-const {Router} = require("express");
-const  ArticleController = require("../controllers/ArticleController");
+const { Router } = require("express");
+const ArticleController = require("../controllers/ArticleController");
 const { validateArticle } = require("../validators/validate-article");
 const { authMiddleware } = require("../middleware/session");
 const { checkRol } = require("../middleware/rol");
-
 
 const multer = require("multer");
 
 const routerArticle = Router();
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb)=>{
-        cb(null, "./src/images/articles/");
-    } ,
-    filename: (req, file, cb)=>{
-        cb(null, "article" + Date.now() + file.originalname);
-    }
-})
+  destination: (req, file, cb) => {
+    cb(null, "./src/images/articles/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, "article" + Date.now() + file.originalname);
+  },
+});
 
-const upload = multer({storage: storage});
-
+const upload = multer({ storage: storage });
 
 /**
  * @openapi
@@ -41,14 +39,14 @@ const upload = multer({storage: storage});
  *          "404":
  *              description: "No se encontraron articulos."
  */
-routerArticle.get("/all-items", ArticleController.getAll );
+routerArticle.get("/all-items", ArticleController.getAll);
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /articles/byId/{id}:
  *      get:
  *          tags:
- *              - articles 
+ *              - articles
  *          summary: "Detalle del articulo"
  *          description: Obteniendo un articulo especifico.
  *          security:
@@ -64,16 +62,16 @@ routerArticle.get("/all-items", ArticleController.getAll );
  *                  description: Articulo encontrado.
  *              "404":
  *                  desccription: Error al encontrar el articulo
- * 
+ *
  */
-routerArticle.get("/byId/:id", ArticleController.getById );
+routerArticle.get("/byId/:id", ArticleController.getById);
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /articles/create-article:
  *      post:
  *          tags:
- *              - articles 
+ *              - articles
  *          summary: "creando articulo"
  *          description: Creando un articulo especifico.
  *          security:
@@ -88,19 +86,25 @@ routerArticle.get("/byId/:id", ArticleController.getById );
  *                  description: Articulo creado con exito.
  *              "400":
  *                  desccription: Faltan datos por enviar.
- * 
+ *
  *              "404":
  *                  desccription: Error al crear el articulo
- * 
+ *
  */
-routerArticle.post("/create-article", authMiddleware, checkRol(["admin"]), validateArticle,ArticleController.create );
+routerArticle.post(
+  "/create-article",
+  authMiddleware,
+  checkRol(["admin"]),
+  validateArticle,
+  ArticleController.create
+);
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /articles/delete-article/{id}:
  *      delete:
  *          tags:
- *              - articles 
+ *              - articles
  *          summary: "eliminar articulos"
  *          description: Eliminar un articulo especifico.
  *          security:
@@ -116,9 +120,14 @@ routerArticle.post("/create-article", authMiddleware, checkRol(["admin"]), valid
  *                  description: Articulo eliminado con exito.
  *              "404":
  *                  desccription: Error al eliminar el articulo
- * 
+ *
  */
-routerArticle.delete("/delete-article/:id", authMiddleware, checkRol(["admin"]), ArticleController.remove );
+routerArticle.delete(
+  "/delete-article/:id",
+  authMiddleware,
+  checkRol(["admin"]),
+  ArticleController.remove
+);
 
 /**
  * @openapi
@@ -156,7 +165,13 @@ routerArticle.delete("/delete-article/:id", authMiddleware, checkRol(["admin"]),
  *      '404':
  *        description: No se pudo actualizar el registro '403'
  */
-routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol(["admin"]), ArticleController.edit );
+routerArticle.put(
+  "/edit-article/:id",
+  validateArticle,
+  authMiddleware,
+  checkRol(["admin"]),
+  ArticleController.edit
+);
 
 /**
  * @openapi
@@ -168,7 +183,7 @@ routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol
  *          description: subiendo una imagen a un articulo especifico.
  *          security:
  *              - bearerAuth: []
- *          parameters:     
+ *          parameters:
  *          - name: id
  *            in: path
  *            required: true
@@ -186,18 +201,24 @@ routerArticle.put("/edit-article/:id", validateArticle, authMiddleware, checkRol
  *                  description: Retorna la imagen insertada en el articulo.
  *              "404":
  *                  description: Error al cargar la foto.
- *                              
- *          
- *      
+ *
+ *
+ *
  */
-routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware, checkRol(["admin"]), ArticleController.uploadImage );
+routerArticle.post(
+  "/upload-image/:id",
+  [upload.single("file")],
+  authMiddleware,
+  checkRol(["admin"]),
+  ArticleController.uploadImage
+);
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /articles/image/{file}:
  *      get:
  *          tags:
- *              - articles 
+ *              - articles
  *          summary: "Buscar imagen"
  *          description: Obteniendo un imagen del listado de articulos.
  *          security:
@@ -213,20 +234,20 @@ routerArticle.post("/upload-image/:id",[upload.single("file")], authMiddleware, 
  *                  description: Imagen encontrada.
  *              "404":
  *                  desccription: Error al encontrar la imagen.
- * 
+ *
  */
-routerArticle.get("/image/:file", authMiddleware, ArticleController.image );
+routerArticle.get("/image/:file", authMiddleware, ArticleController.image);
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /articles/search/{search}:
  *      get:
  *          tags:
- *              - articles 
+ *              - articles
  *          summary: "Buscar titulo o contenido"
  *          description: Obteniendo un titulo o contenido de la lista de articulos.
  *          security:
- *              - bearerAuth: [] 
+ *              - bearerAuth: []
  *          parameters:
  *          - name: search
  *            in: path
@@ -238,9 +259,8 @@ routerArticle.get("/image/:file", authMiddleware, ArticleController.image );
  *                  description: Busqueda realizada con exito.
  *              "404":
  *                  desccription: Error al realizar la busqueda.
- * 
+ *
  */
-routerArticle.get("/search/:search", ArticleController.search );
+routerArticle.get("/search/:search", ArticleController.search);
 
-
-module.exports = {routerArticle};
+module.exports = { routerArticle };

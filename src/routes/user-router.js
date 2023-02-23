@@ -1,14 +1,17 @@
-const {Router} = require("express");
-const  UserController = require("../controllers/UserController");
-const { validateRegister, validateLogin } = require("../validators/validate-user")
-const routerUser= Router();
+const { Router } = require("express");
+const UserController = require("../controllers/UserController");
+const {
+  validateRegister,
+  validateLogin,
+} = require("../validators/validate-user");
+const routerUser = Router();
 
-/** 
- * @openapi 
+/**
+ * @openapi
  * /users/register:
  *      post:
  *          tags:
- *              - users 
+ *              - users
  *          summary: "Registrando usuario"
  *          description: Registrando un usuario con su nombre, email y password
  *          requestBody:
@@ -23,17 +26,16 @@ const routerUser= Router();
  *                  description: Faltan datos por enviar.
  *              "404":
  *                  description: Error al crear el usuario.
- * 
+ *
  */
-routerUser.post("/register", validateRegister ,UserController.register );
+routerUser.post("/register", validateRegister, UserController.register);
 
-
-/** 
- * @openapi 
+/**
+ * @openapi
  * /users/login:
  *      post:
  *          tags:
- *              - users 
+ *              - users
  *          summary: "Logeando usuario"
  *          description: Logeando un usuario con su email y password
  *          requestBody:
@@ -48,8 +50,8 @@ routerUser.post("/register", validateRegister ,UserController.register );
  *                  description: Faltan datos por enviar.
  *              "404":
  *                  description: Error al logear el usuario.
- * 
+ *
  */
-routerUser.post("/login", validateLogin ,UserController.login );
+routerUser.post("/login", validateLogin, UserController.login);
 
-module.exports = {routerUser};
+module.exports = { routerUser };
