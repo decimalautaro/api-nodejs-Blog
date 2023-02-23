@@ -1,12 +1,17 @@
 const Article = require("../models/Articles");
+const User = require("../models/Users");
+
 const { validateArticle } = require("../validators/validate-article");
 const fs = require("fs");
 const path = require("path");
 
-const create = (req, res) => {
-  const params = req.body;
+const create = async(req, res) => {
 
-  const article = new Article(params);
+  const params = req.body;
+  
+  const article = await Article.create(params);
+  article.author = req.user._id;
+
   article.save((error) => {
     if (error || !article) {
       return res.status(400).json({
@@ -15,12 +20,14 @@ const create = (req, res) => {
       });
     }
   });
+  
+  const user = await User.findById(req.user._id);
+    user.articles.push(article._id);
+    await user.save();
 
-  const user = req.user;
 
   return res.status(200).json({
     status: "success",
-    user: user,
     article: article,
     message: "articulo creado con exito",
   });

@@ -14,6 +14,9 @@ const ArticleSchema = Schema(
       type: String,
       default: "default.png",
     },
+    author: { 
+      type: Schema.Types.ObjectId, ref: 'User'
+     },
   },
   {
     timestamps: true,

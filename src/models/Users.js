@@ -18,6 +18,7 @@ const UserSchema = Schema(
       type: ["user", "admin"],
       default: "user",
     },
+    articles: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
   },
   {
     timestamps: true,
