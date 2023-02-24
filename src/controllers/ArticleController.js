@@ -33,8 +33,8 @@ const create = async(req, res) => {
   });
 };
 
-const getAll = (req, res) => {
-  const consulta = Article.find({})
+const getAll = async(req, res) => {
+  const consulta = await Article.find({})
     .sort({ date: -1 })
     .exec((error, articles) => {
       if (error || !articles) {
@@ -51,9 +51,9 @@ const getAll = (req, res) => {
     });
 };
 
-const getById = (req, res) => {
+const getById = async (req, res) => {
   const { id } = req.params;
-  Article.findById(id, (error, article) => {
+   await Article.findById(id, (error, article) => {
     if (error || !article) {
       return res.status(404).json({
         status: "error",
@@ -66,9 +66,9 @@ const getById = (req, res) => {
     });
   });
 };
-const remove = (req, res) => {
+const remove = async (req, res) => {
   const { id } = req.params;
-  Article.findOneAndDelete({ _id: id }, (error, articleRemove) => {
+  await Article.findOneAndDelete({ _id: id }, (error, articleRemove) => {
     if (error || !articleRemove) {
       return res.status(500).json({
         status: "error",
@@ -85,11 +85,11 @@ const remove = (req, res) => {
   });
 };
 
-const edit = (req, res) => {
+const edit = async (req, res) => {
   const { id } = req.params;
   const params = req.body;
 
-  Article.findOneAndUpdate(
+  await Article.findOneAndUpdate(
     { _id: id },
     params,
     { new: true },
@@ -109,7 +109,7 @@ const edit = (req, res) => {
   );
 };
 
-const uploadImage = (req, res) => {
+const uploadImage = async(req, res) => {
   if (!req.file && !req.files) {
     return res.status(404).json({
       status: "error",
@@ -137,7 +137,7 @@ const uploadImage = (req, res) => {
   } else {
     const { id } = req.params;
 
-    Article.findOneAndUpdate(
+    await Article.findOneAndUpdate(
       { _id: id },
       { image: req.file.filename },
       { new: true },
@@ -178,10 +178,10 @@ const image = (req, res) => {
   });
 };
 
-const search = (req, res) => {
+const search = async(req, res) => {
   const { search } = req.params;
 
-  Article.find({
+  await Article.find({
     $or: [
       { title: { $regex: search, $options: "i" } },
       { content: { $regex: search, $options: "i" } },
