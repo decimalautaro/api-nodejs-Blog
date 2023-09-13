@@ -8,6 +8,15 @@ const register = async (req, res) => {
   const passwordHash = await encrypt(params.password);
   const body = { ...params, password: passwordHash };
 
+  const existUser = await User.findOne({ email: params.email });
+
+  if (existUser) {
+    return res.status(400).json({
+      status: "error",
+      message: "User already exists.",
+    });
+  }
+
   const dataUser = await User.create(body);
   dataUser.save((error) => {
     if (error || !dataUser) {
