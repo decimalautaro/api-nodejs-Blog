@@ -1,7 +1,7 @@
-const { encrypt, compare } = require("../utils/handlePassword");
-const { tokenSign } = require("../utils/handleJWT");
-const { handleHttpError } = require("../utils/handleError");
-const User = require("../models/Users");
+import { encrypt, compare } from "../utils/handlePassword.js";
+import { tokenSign } from "../utils/handleJWT.js";
+import { handleHttpError } from "../utils/handleError.js";
+import { User } from "../models/Users.js";
 
 const register = async (req, res) => {
   const params = req.body;
@@ -13,7 +13,7 @@ const register = async (req, res) => {
     if (error || !dataUser) {
       return res.status(404).json({
         status: "error",
-        message: "no se ha guardado el usuario",
+        message: "User has not been saved.",
       });
     }
   });
@@ -26,7 +26,7 @@ const register = async (req, res) => {
   return res.status(200).json({
     status: "success",
     user: data,
-    message: "Usuario creado con exito",
+    message: "User created successfully.",
   });
 };
 
@@ -36,7 +36,7 @@ const login = async (req, res) => {
     const user = await User.findOne({ email: params.email });
 
     if (!user) {
-      handleHttpError(res, "El usuario no existe.", 404);
+      handleHttpError(res, "Username does not exist.", 404);
       return;
     }
 
@@ -45,7 +45,7 @@ const login = async (req, res) => {
     const check = await compare(params.password, hashPassword);
 
     if (!check) {
-      handleHttpError(res, "Password incorrecta.", 401);
+      handleHttpError(res, "Incorrect password.", 401);
       return;
     }
     user.set("password", undefined, { strict: false });
@@ -57,11 +57,8 @@ const login = async (req, res) => {
     res.send({ data });
   } catch (e) {
     console.log(e);
-    handleHttpError(res, "Error al logear.");
+    handleHttpError(res, "Login error.");
   }
 };
 
-module.exports = {
-  register,
-  login,
-};
+export { register, login };

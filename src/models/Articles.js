@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const ArticleSchema = Schema(
   {
@@ -14,13 +14,16 @@ const ArticleSchema = Schema(
       type: String,
       default: "default.png",
     },
-    author: { 
-      type: Schema.Types.ObjectId, ref: 'User'
-     },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = model("Article", ArticleSchema);
+const Article = model("Article", ArticleSchema);
+
+export { Article };

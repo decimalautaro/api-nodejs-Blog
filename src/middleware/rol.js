@@ -1,4 +1,4 @@
-const { handleHttpError } = require("../utils/handleError");
+import { handleHttpError } from "../utils/handleError.js";
 
 const checkRol = (rols) => (req, res, next) => {
   try {
@@ -7,16 +7,14 @@ const checkRol = (rols) => (req, res, next) => {
 
     checkValueRol = rols.some((rolSigngle) => rolesByUser.includes(rolSigngle));
     if (!checkValueRol) {
-      handleHttpError(res, "Error el usuario no tiene permisos.", 403);
+      handleHttpError(res, "Error the user does not have permissions.", 403);
       return;
     }
 
     next();
   } catch (error) {
-    handleHttpError(res, "Error de permisos.", 403);
+    handleHttpError(res, "Permissions error.", 403);
   }
 };
 
-module.exports = {
-  checkRol,
-};
+export { checkRol };

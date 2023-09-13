@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const UserController = require("../controllers/UserController");
-const {
+import { Router } from "express";
+import { register, login } from "../controllers/UserController.js";
+import {
   validateRegister,
   validateLogin,
-} = require("../validators/validate-user");
+} from "../validators/validate-user.js";
 const routerUser = Router();
 
 /**
@@ -28,7 +28,7 @@ const routerUser = Router();
  *                  description: Error al crear el usuario.
  *
  */
-routerUser.post("/register", validateRegister, UserController.register);
+routerUser.post("/register", validateRegister, register);
 
 /**
  * @openapi
@@ -52,6 +52,6 @@ routerUser.post("/register", validateRegister, UserController.register);
  *                  description: Error al logear el usuario.
  *
  */
-routerUser.post("/login", validateLogin, UserController.login);
+routerUser.post("/login", validateLogin, login);
 
-module.exports = { routerUser };
+export { routerUser };

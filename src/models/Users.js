@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+import { Schema, model } from "mongoose";
 
 const UserSchema = Schema(
   {
@@ -18,11 +18,13 @@ const UserSchema = Schema(
       type: ["user", "admin"],
       default: "user",
     },
-    articles: [{ type: Schema.Types.ObjectId, ref: 'Article' }],
+    articles: [{ type: Schema.Types.ObjectId, ref: "Article" }],
   },
   {
     timestamps: true,
   }
 );
 
-module.exports = model("User", UserSchema);
+const User = model("User", UserSchema);
+
+export { User };

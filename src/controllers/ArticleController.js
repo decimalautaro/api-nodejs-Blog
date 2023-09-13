@@ -1,14 +1,12 @@
-const Article = require("../models/Articles");
-const User = require("../models/Users");
+import { Article } from "../models/Articles.js";
+import { User } from "../models/Users.js";
 
-const { validateArticle } = require("../validators/validate-article");
-const fs = require("fs");
-const path = require("path");
+import fs from "fs";
+import path from "path";
 
-const create = async(req, res) => {
-
+const create = async (req, res) => {
   const params = req.body;
-  
+
   const article = await Article.create(params);
   article.author = req.user._id;
 
@@ -16,31 +14,30 @@ const create = async(req, res) => {
     if (error || !article) {
       return res.status(400).json({
         status: "error",
-        message: "no se ha guardado el articulo",
+        message: "The article has not been saved.",
       });
     }
   });
-  
-  const user = await User.findById(req.user._id);
-    user.articles.push(article._id);
-    await user.save();
 
+  const user = await User.findById(req.user._id);
+  user.articles.push(article._id);
+  await user.save();
 
   return res.status(200).json({
     status: "success",
     article: article,
-    message: "articulo creado con exito",
+    message: "Article created successfully.",
   });
 };
 
-const getAll = async(req, res) => {
+const getAll = async (req, res) => {
   const consulta = await Article.find({})
     .sort({ date: -1 })
     .exec((error, articles) => {
       if (error || !articles) {
         return res.status(404).json({
           status: "error",
-          message: "no se han encontrado articulos",
+          message: "No articles found.",
         });
       }
 
@@ -53,11 +50,11 @@ const getAll = async(req, res) => {
 
 const getById = async (req, res) => {
   const { id } = req.params;
-   await Article.findById(id, (error, article) => {
+  await Article.findById(id, (error, article) => {
     if (error || !article) {
       return res.status(404).json({
         status: "error",
-        message: "no se ha encontrado el articulo",
+        message: "No articles found.",
       });
     }
     res.status(200).json({
@@ -73,14 +70,14 @@ const remove = async (req, res) => {
       return res.status(500).json({
         status: "error",
         article: articleRemove,
-        message: "error al borrar el articulo",
+        message: "Error when deleting the article.",
       });
     }
 
     return res.status(200).json({
       status: "success",
       article: articleRemove,
-      message: "articulo borrado",
+      message: "Deleted article.",
     });
   });
 };
@@ -97,7 +94,7 @@ const edit = async (req, res) => {
       if (error || !articleUpdate) {
         return res.status(500).json({
           status: "error",
-          message: "error al actualizar",
+          message: "Error updating.",
         });
       }
 
@@ -109,11 +106,11 @@ const edit = async (req, res) => {
   );
 };
 
-const uploadImage = async(req, res) => {
+const uploadImage = async (req, res) => {
   if (!req.file && !req.files) {
     return res.status(404).json({
       status: "error",
-      message: "Petición invalida.",
+      message: "Invalid petition.",
     });
   }
 
@@ -131,7 +128,7 @@ const uploadImage = async(req, res) => {
     fs.unlink(req.file.path, (error) => {
       return res.status(400).json({
         status: "error",
-        message: "extension del archivo invalida.",
+        message: "Invalid file extension.",
       });
     });
   } else {
@@ -145,7 +142,7 @@ const uploadImage = async(req, res) => {
         if (error || !articleUpdate) {
           return res.status(500).json({
             status: "error",
-            message: "error al actualizar",
+            message: "Error updating.",
           });
         }
 
@@ -169,7 +166,7 @@ const image = (req, res) => {
     } else {
       return res.status(404).json({
         status: "error",
-        message: "La imagen no existe",
+        message: "The image does not exist.",
         exist,
         file,
         routePhysical,
@@ -178,7 +175,7 @@ const image = (req, res) => {
   });
 };
 
-const search = async(req, res) => {
+const search = async (req, res) => {
   const { search } = req.params;
 
   await Article.find({
@@ -192,7 +189,7 @@ const search = async(req, res) => {
       if (error || !foundItems || foundItems.length <= 0) {
         return res.status(404).json({
           status: "error",
-          message: "no se han encontrado articulos",
+          message: "No articles found.",
         });
       }
 
@@ -203,13 +200,4 @@ const search = async(req, res) => {
     });
 };
 
-module.exports = {
-  getAll,
-  getById,
-  create,
-  edit,
-  remove,
-  uploadImage,
-  image,
-  search,
-};
+export { getAll, getById, create, edit, remove, uploadImage, image, search };

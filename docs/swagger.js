@@ -1,5 +1,5 @@
-const { path } = require("path");
-const swaggerJsDoc = require("swagger-jsdoc");
+import path from "path";
+import swaggerJsDoc from "swagger-jsdoc";
 
 /**
  * Configuration API
@@ -7,7 +7,7 @@ const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerDefinition = {
   openapi: "3.0.0",
   info: {
-    title: "Documentación de API para Blog.",
+    title: "API Documentation for Blog.",
     version: "1.0.0",
   },
   servers: [
@@ -69,4 +69,4 @@ const options = {
 
 const openApiConfiguration = swaggerJsDoc(options);
 
-module.exports = openApiConfiguration;
+export default openApiConfiguration;

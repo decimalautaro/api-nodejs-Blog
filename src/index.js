@@ -1,12 +1,15 @@
-const express = require("express");
-const { connect } = require("mongoose");
-const cors = require("cors");
-const swaggerUI = require("swagger-ui-express");
-const openApiConfiguration = require("../docs/swagger");
-const { routerArticle } = require("./routes/article-router.js");
-const { routerUser } = require("./routes/user-router");
+import express from "express";
+import cors from "cors";
+import swaggerUI from "swagger-ui-express";
+import openApiConfiguration from "../docs/swagger.js";
+import { routerArticle } from "./routes/article-router.js";
+import { routerUser } from "./routes/user-router.js";
+import dotenv from "dotenv";
+import { run } from "./config/database.js";
 
-require("dotenv").config();
+if (!process.env.PORT) {
+  dotenv.config();
+}
 
 const app = express();
 
@@ -14,24 +17,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(
-  "/api/documentation",
-  swaggerUI.serve,
-  swaggerUI.setup(openApiConfiguration)
-);
+app.use("/api/docs", swaggerUI.serve, swaggerUI.setup(openApiConfiguration));
 app.use("/api/articles", routerArticle);
 app.use("/api/users", routerUser);
 
 const PORT = process.env.PORT;
 const NAME_DB = process.env.NAME_DB;
 
-const run = async () => {
-  await connect("mongodb://localhost:27017/" + NAME_DB);
-  console.log("conexion a la db exitosa.");
-};
-
-run().catch((err) => console.log(err));
+run();
 
 app.listen(PORT, () => {
-  console.log(`Servidor escuchando en: http://localhost:${PORT}`);
+  console.log(`Server listen in port:${PORT}`);
 });

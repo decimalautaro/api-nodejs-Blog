@@ -1,4 +1,4 @@
-const { validationResult } = require("express-validator");
+import { validationResult } from "express-validator";
 
 const validateResult = (req, res, next) => {
   try {
@@ -6,8 +6,8 @@ const validateResult = (req, res, next) => {
     return next();
   } catch (error) {
     res.status(400);
-    res.send({ message: "Faltan datos por enviar." });
+    res.send({ message: "Data is missing." });
   }
 };
 
-module.exports = { validateResult };
+export { validateResult };

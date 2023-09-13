@@ -1,10 +1,19 @@
-const { Router } = require("express");
-const ArticleController = require("../controllers/ArticleController");
-const { validateArticle } = require("../validators/validate-article");
-const { authMiddleware } = require("../middleware/session");
-const { checkRol } = require("../middleware/rol");
+import { Router } from "express";
+import {
+  getAll,
+  getById,
+  create,
+  edit,
+  remove,
+  uploadImage,
+  image,
+  search,
+} from "../controllers/ArticleController.js";
+import { validateArticle } from "../validators/validate-article.js";
+import { authMiddleware } from "../middleware/session.js";
+import { checkRol } from "../middleware/rol.js";
 
-const multer = require("multer");
+import multer from "multer";
 
 const routerArticle = Router();
 
@@ -39,7 +48,7 @@ const upload = multer({ storage: storage });
  *          "404":
  *              description: "No se encontraron articulos."
  */
-routerArticle.get("/all-items", ArticleController.getAll);
+routerArticle.get("/all-items", getAll);
 
 /**
  * @openapi
@@ -64,7 +73,7 @@ routerArticle.get("/all-items", ArticleController.getAll);
  *                  desccription: Error al encontrar el articulo
  *
  */
-routerArticle.get("/byId/:id", ArticleController.getById);
+routerArticle.get("/byId/:id", getById);
 
 /**
  * @openapi
@@ -96,7 +105,7 @@ routerArticle.post(
   authMiddleware,
   checkRol(["admin"]),
   validateArticle,
-  ArticleController.create
+  create
 );
 
 /**
@@ -126,7 +135,7 @@ routerArticle.delete(
   "/delete-article/:id",
   authMiddleware,
   checkRol(["admin"]),
-  ArticleController.remove
+  remove
 );
 
 /**
@@ -170,7 +179,7 @@ routerArticle.put(
   validateArticle,
   authMiddleware,
   checkRol(["admin"]),
-  ArticleController.edit
+  edit
 );
 
 /**
@@ -210,7 +219,7 @@ routerArticle.post(
   [upload.single("file")],
   authMiddleware,
   checkRol(["admin"]),
-  ArticleController.uploadImage
+  uploadImage
 );
 
 /**
@@ -236,7 +245,7 @@ routerArticle.post(
  *                  desccription: Error al encontrar la imagen.
  *
  */
-routerArticle.get("/image/:file", authMiddleware, ArticleController.image);
+routerArticle.get("/image/:file", authMiddleware, image);
 
 /**
  * @openapi
@@ -261,6 +270,6 @@ routerArticle.get("/image/:file", authMiddleware, ArticleController.image);
  *                  desccription: Error al realizar la busqueda.
  *
  */
-routerArticle.get("/search/:search", ArticleController.search);
+routerArticle.get("/search/:search", search);
 
-module.exports = { routerArticle };
+export { routerArticle };

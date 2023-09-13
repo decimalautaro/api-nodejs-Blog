@@ -1,11 +1,11 @@
-const { handleHttpError } = require("../utils/handleError");
-const { verifyToken } = require("../utils/handleJWT");
-const User = require("../models/Users");
+import { handleHttpError } from "../utils/handleError.js";
+import { verifyToken } from "../utils/handleJWT.js";
+import { User } from "../models/Users.js";
 
 const authMiddleware = async (req, res, next) => {
   try {
     if (!req.headers.authorization) {
-      handleHttpError(res, "Se necesita una sesión.", 401);
+      handleHttpError(res, "One session is needed.", 401);
       return;
     }
 
@@ -13,7 +13,7 @@ const authMiddleware = async (req, res, next) => {
     const dataToken = await verifyToken(token);
 
     if (!dataToken._id) {
-      handleHttpError(res, "Error en el ID del token.", 401);
+      handleHttpError(res, "Token ID error.", 401);
       return;
     }
     const user = await User.findById(dataToken._id);
@@ -21,8 +21,8 @@ const authMiddleware = async (req, res, next) => {
 
     next();
   } catch (error) {
-    handleHttpError(res, "Sesion no autorizada", 401);
+    handleHttpError(res, "Unauthorized session", 401);
   }
 };
 
-module.exports = { authMiddleware };
+export { authMiddleware };

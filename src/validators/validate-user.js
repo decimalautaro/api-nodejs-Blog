@@ -1,5 +1,5 @@
-const { check } = require("express-validator");
-const { validateResult } = require("../utils/handleValidator");
+import { check } from "express-validator";
+import { validateResult } from "../utils/handleValidator.js";
 
 const validateRegister = [
   check("name").exists().notEmpty().isLength({ min: 3, max: 99 }),
@@ -18,4 +18,4 @@ const validateLogin = [
   },
 ];
 
-module.exports = { validateRegister, validateLogin };
+export { validateRegister, validateLogin };
