@@ -5,7 +5,9 @@ const checkRol = (rols) => (req, res, next) => {
     const { user } = req;
     const rolesByUser = user.role;
 
-    checkValueRol = rols.some((rolSigngle) => rolesByUser.includes(rolSigngle));
+    const checkValueRol = rols.some((rolSigngle) =>
+      rolesByUser.includes(rolSigngle)
+    );
     if (!checkValueRol) {
       handleHttpError(res, "Error the user does not have permissions.", 403);
       return;
